@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  ubuntu-lab:
+    image: ubuntu:latest
+    container_name: ubuntu-lab
+    stdin_open: true
+    tty: true
+    command: /home/swagger/init.sh
+    volumes:
+      - "/mnt/d/programming/amadeus/swagger:/home/swagger"
+    working_dir: /home/swagger
