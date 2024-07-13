@@ -1,0 +1,31 @@
+{
+  "name": "github-actions-audit",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "tools/github-actions/audit/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:noop",
+      "dependsOn": [
+        "compile-github-action"
+      ]
+    },
+    "compile-github-action": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build"
+      }
+    },
+    "lint": {
+      "options": {
+        "eslintConfig": "tools/github-actions/audit/.eslintrc.js",
+        "lintFilePatterns": [
+          "tools/github-actions/audit/src/**/*.ts",
+          "tools/github-actions/audit/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

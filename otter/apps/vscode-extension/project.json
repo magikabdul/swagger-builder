@@ -1,0 +1,59 @@
+{
+  "name": "vscode-extension",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "apps/vscode-extension/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "postbuild"
+      },
+      "outputs": [
+        "{projectRoot}/dist/package.json",
+        "{projectRoot}/dist/README.md",
+        "{projectRoot}/dist/assets",
+        "{projectRoot}/dist/.vscodeignore"
+      ],
+      "dependsOn": ["compile"]
+    },
+    "compile": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build:esbuild"
+      },
+      "outputs": ["{projectRoot}/dist/src/extension.js"]
+    },
+    "lint": {
+      "options": {
+        "eslintConfig": "apps/vscode-extension/.eslintrc.js",
+        "lintFilePatterns": [
+          "apps/vscode-extension/src/**/*.ts",
+          "apps/vscode-extension/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/vscode-extension/jest.config.js"
+      }
+    },
+    "prepare-publish": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "prepare:publish"
+      }
+    },
+    "publish-extension": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm install && npx @vscode/vsce publish",
+        "cwd": "apps/vscode-extension/dist"
+      },
+      "dependsOn": ["prepare-publish"]
+    }
+  },
+  "tags": []
+}

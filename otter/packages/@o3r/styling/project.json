@@ -1,0 +1,72 @@
+{
+  "name": "styling",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/@o3r/styling/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:noop",
+      "dependsOn": ["^build", "build-builders", "compile"]
+    },
+    "compile": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "project": "packages/@o3r/styling/ng-package.json",
+        "tsConfig": "packages/@o3r/styling/tsconfig.build.json"
+      }
+    },
+    "prepare-build-builders": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "prepare:build:builders"
+      }
+    },
+    "build-builders": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build:builders"
+      }
+    },
+    "lint": {
+      "options": {
+        "eslintConfig": "packages/@o3r/styling/.eslintrc.js",
+        "lintFilePatterns": [
+          "packages/@o3r/styling/src/**/*.ts",
+          "packages/@o3r/styling/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "packages/@o3r/styling/jest.config.js"
+      }
+    },
+    "test-int": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "packages/@o3r/styling/testing/jest.config.it.js"
+      }
+    },
+    "prepare-publish": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "prepare:publish"
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm publish packages/@o3r/styling/dist"
+      }
+    },
+    "documentation": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "compodoc"
+      }
+    }
+  },
+  "tags": []
+}

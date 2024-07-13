@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/angular/angular-cli/main/packages/angular_devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add Otter testing to the project.",
+      "factory": "./schematics/ng-add/index#ngAdd",
+      "schema": "./schematics/ng-add/schema.json",
+      "aliases": ["install", "i"]
+    },
+    "playwright-scenario": {
+      "description": "Generate a Playwright scenario into the project.",
+      "factory": "./schematics/playwright/scenario/index#ngGeneratePlaywrightScenario",
+      "schema": "./schematics/playwright/scenario/schema.json"
+    },
+    "playwright-sanity": {
+      "description": "Generate a Playwright sanity into the project.",
+      "factory": "./schematics/playwright/sanity/index#ngGeneratePlaywrightSanity",
+      "schema": "./schematics/playwright/sanity/schema.json"
+    },
+    "fixture-to-component": {
+      "description": "Add Otter Fixture to an existing component",
+      "factory": "./schematics/fixture-to-component/index#ngAddFixture",
+      "schema": "./schematics/fixture-to-component/schema.json",
+      "aliases": ["add-fixture"]
+    },
+    "add-functions-to-fixture": {
+      "description": "Adding functions to an Otter fixture based on a selector and default methods",
+      "factory": "./schematics/add-functions-to-fixture/index#ngAddFunctionsToFixture",
+      "schema": "./schematics/add-functions-to-fixture/schema.json"
+    }
+  }
+}

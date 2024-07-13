@@ -1,0 +1,31 @@
+{
+  "name": "github-actions-get-npm-tag",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "tools/github-actions/get-npm-tag/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:noop",
+      "dependsOn": [
+        "compile-github-action"
+      ]
+    },
+    "compile-github-action": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build"
+      }
+    },
+    "lint": {
+      "options": {
+        "eslintConfig": "tools/github-actions/get-npm-tag/.eslintrc.js",
+        "lintFilePatterns": [
+          "tools/github-actions/get-npm-tag/src/**/*.ts",
+          "tools/github-actions/get-npm-tag/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

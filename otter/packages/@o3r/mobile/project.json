@@ -1,0 +1,74 @@
+{
+  "name": "mobile",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/master/packages/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/@o3r/mobile/src",
+  "prefix": "o3r",
+  "targets": {
+    "build": {
+      "executor": "nx:noop",
+      "dependsOn": ["build-builders", "compile"]
+    },
+    "compile": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "project": "packages/@o3r/mobile/ng-package.json",
+        "tsConfig": "packages/@o3r/mobile/tsconfig.build.json"
+      }
+    },
+    "build-builders": {
+      "executor": "nx:run-script",
+      "dependsOn": ["^build", "compile", "prepare-build-builders"],
+      "outputs": [
+        "{projectRoot}/dist/pcloudy",
+        "{projectRoot}/dist/schematics/**/*.js",
+        "{projectRoot}/dist/schematics/**/*.d.ts",
+        "{projectRoot}/dist/schematics/**/*.d.ts.map",
+        "{projectRoot}/build/.tsbuildinfo.builders"
+      ],
+      "options": {
+        "script": "build:builders"
+      }
+    },
+    "lint": {
+      "options": {
+        "eslintConfig": "packages/@o3r/mobile/.eslintrc.js",
+        "lintFilePatterns": [
+          "packages/@o3r/mobile/src/**/*.ts",
+          "packages/@o3r/mobile/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "packages/@o3r/mobile/jest.config.js"
+      }
+    },
+    "prepare-publish": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "prepare:publish"
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm publish packages/@o3r/mobile/dist"
+      }
+    },
+    "prepare-build-builders": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "prepare:build:builders"
+      }
+    },
+    "documentation": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "compodoc"
+      }
+    }
+  },
+  "tags": []
+}

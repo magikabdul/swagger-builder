@@ -1,0 +1,45 @@
+{
+  "version": "0.0.0-placeholder",
+  "private": true,
+  "name": "audit-gh-action",
+  "description": "Yarn audit GitHub action provided by Otter",
+  "main": "tmp/main.js",
+  "scripts": {
+    "nx": "nx",
+    "build": "tsc",
+    "package": "ncc build --source-map --license LICENSE.txt --out packaged-action"
+  },
+  "keywords": [
+    "github-actions",
+    "audit",
+    "otter"
+  ],
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.1",
+    "audit-types": "~0.6.0"
+  },
+  "devDependencies": {
+    "@angular-eslint/eslint-plugin": "~18.0.0",
+    "@nx/eslint-plugin": "~19.3.0",
+    "@o3r/eslint-config-otter": "workspace:~",
+    "@o3r/eslint-plugin": "workspace:~",
+    "@stylistic/eslint-plugin-ts": "^2.0.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
+    "@typescript-eslint/utils": "^7.14.1",
+    "@vercel/ncc": "~0.38.0",
+    "audit-types": "~0.6.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-jest": "~28.6.0",
+    "eslint-plugin-jsdoc": "~48.5.0",
+    "eslint-plugin-prefer-arrow": "~1.2.3",
+    "eslint-plugin-unicorn": "^54.0.0",
+    "jsonc-eslint-parser": "~2.4.0",
+    "typescript": "~5.4.2"
+  },
+  "engines": {
+    "node": "^18.19.1 || ^20.11.1 || >=22.0.0"
+  }
+}

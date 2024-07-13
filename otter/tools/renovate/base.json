@@ -1,0 +1,123 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    "group:allNonMajor",
+    "group:monorepos",
+    "group:recommended",
+    "group:test",
+    "group:linters",
+    "helpers:pinGitHubActionDigestsToSemver"
+  ],
+  "hostRules": [
+    {
+      "timeout": 240000
+    }
+  ],
+  "baseBranches": [
+    "main",
+    "master",
+    "/^release\\/.*-next$/"
+  ],
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "enabledManagers": [
+    "npm",
+    "github-actions"
+  ],
+  "updateInternalDeps": true,
+  "postUpdateOptions": [
+    "yarnDedupeHighest"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "automerge": true,
+  "platformAutomerge": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 4am on monday"
+    ]
+  },
+  "packageRules": [
+    {
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "automerge": true,
+      "rangeStrategy": "replace"
+    },
+    {
+      "matchPackagePatterns": [
+        "^@angular",
+        "^ng-packagr",
+        "^@schematics",
+        "angular",
+        "^@ngrx",
+        "^zone.js",
+        "^@nrwl",
+        "^@nx",
+        "^nx"
+      ],
+      "groupName": "Angular dependencies",
+      "groupSlug": "angular-dependencies"
+    },
+    {
+      "matchPackagePatterns": [
+        "typescript",
+        "tslib"
+      ],
+      "groupName": "Typescript dependencies",
+      "groupSlug": "typescript-dependencies"
+    },
+    {
+      "matchPackageNames": [
+        "typescript"
+      ],
+      "rangeStrategy": "in-range-only"
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "matchBaseBranches": [
+        "main",
+        "master",
+        "/^release/"
+      ],
+      "enabled": false
+    },
+    {
+      "matchUpdateTypes": [
+        "major",
+        "minor"
+      ],
+      "matchBaseBranches": [
+        "/^release/"
+      ],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": [
+        "typescript"
+      ],
+      "matchBaseBranches": [
+        "/.*-next$/"
+      ],
+      "rangeStrategy": "replace"
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "matchBaseBranches": [
+        "/.*-next$/"
+      ],
+      "groupName": "Major dependencies",
+      "groupSlug": "major-dependencies",
+      "enabled": true
+    }
+  ]
+}
