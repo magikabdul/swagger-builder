@@ -3,7 +3,6 @@ apt-get update
 apt-get install -y
 apt install curl -y
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-sleep 2
 export NVM_DIR="$HOME/.nvm"
 \. "$NVM_DIR/nvm.sh"
 nvm install 20
